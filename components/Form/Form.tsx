@@ -33,6 +33,7 @@ export const Register = () => {
 						placeholder="enter your email"
 						{...register("email", { required: true })}
 					/>
+					<Image src="/icons/eye-open" width={20} height={20} alt="eye open" />
 				</Form.Item>
 				<Form.Item>
 					<label htmlFor="password">password</label>
@@ -47,7 +48,12 @@ export const Register = () => {
 			<S.ButtonContainer>
 				<Button.Submit type="submit">login</Button.Submit>
 				<Button.Google>
-					<Image src="/icons/google.svg" width={20} height={20} />
+					<Image
+						src="/icons/google.svg"
+						width={20}
+						height={20}
+						alt="google icon"
+					/>
 					sign in with Google
 				</Button.Google>
 			</S.ButtonContainer>
