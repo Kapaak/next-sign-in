@@ -6,6 +6,7 @@ import FormActions from "./FormActions/FormActions";
 import * as S from "./Form.style";
 import * as Form from "@/styles/Form";
 import * as Button from "@/styles/Button";
+import { useState } from "react";
 
 type Inputs = {
 	email: string;
@@ -13,11 +14,17 @@ type Inputs = {
 };
 
 export const Register = () => {
+	const revealPasswordIcon = "/icons/eye-open.svg";
+	const hidePasswordIcon = "/icons/eye-closed.svg";
+
+	const [toggle, setToggle] = useState(false);
+
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 	} = useForm<Inputs>();
+
 	const onSubmit: SubmitHandler<Inputs> = data => {
 		console.log(data, "data");
 		console.log(errors, "errors");
@@ -33,15 +40,24 @@ export const Register = () => {
 						placeholder="enter your email"
 						{...register("email", { required: true })}
 					/>
-					<Image src="/icons/eye-open" width={20} height={20} alt="eye open" />
 				</Form.Item>
 				<Form.Item>
 					<label htmlFor="password">password</label>
-					<input
-						type="password"
-						placeholder="password"
-						{...register("password", { required: true })}
-					/>
+					<div style={{ position: "relative" }}>
+						<input
+							type={toggle ? "text" : "password"}
+							placeholder="password"
+							{...register("password", { required: true })}
+						/>
+						<S.VisibilityToggle onClick={() => setToggle(prev => !prev)}>
+							<Image
+								src={toggle ? hidePasswordIcon : revealPasswordIcon}
+								width={20}
+								height={20}
+								alt="eye open"
+							/>
+						</S.VisibilityToggle>
+					</div>
 				</Form.Item>
 			</S.ItemContainer>
 			<FormActions />
@@ -61,4 +77,30 @@ export const Register = () => {
 	);
 };
 
-// export const LogIn = () =>() // a tady udelam sing in form
+export const Login = () => {
+	return (
+		<S.Form>
+			<S.ItemContainer>
+				<Form.Item>
+					<label htmlFor="reg-name">user name</label>
+					<input type="text" name="reg-name" />
+				</Form.Item>
+				<Form.Item>
+					<label htmlFor="reg-email">registration email</label>
+					<input type="email" name="reg-email" />
+				</Form.Item>
+				<Form.Item>
+					<label htmlFor="reg-password">enter your password</label>
+					<input type="password" name="reg-password" />
+				</Form.Item>
+				<Form.Item>
+					<label htmlFor="reg-password-confirm">confirm your password</label>
+					<input type="password" name="reg-password-confirm" />
+				</Form.Item>
+			</S.ItemContainer>
+			<S.ButtonContainer>
+				<Button.Submit>create account</Button.Submit>
+			</S.ButtonContainer>
+		</S.Form>
+	);
+};

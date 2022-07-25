@@ -1,28 +1,27 @@
 import Link from "next/link";
 //components
-import * as Form from "../../Form/Form";
+import * as FormComponent from "../../Form/Form";
 //styles
-import * as S from "./SignInForm.style";
-import * as SForm from "../../../styles/Form";
+import * as Form from "@/styles/Form";
 
 const SignInForm = () => {
 	return (
-		<S.SignInWrapper>
-			<S.FlexContainer>
-				<SForm.Headline>Good to see you again!</SForm.Headline>
-				<SForm.SubHeadline>
+		<Form.Wrapper>
+			<Form.FlexContainer>
+				<Form.Headline>Good to see you again!</Form.Headline>
+				<Form.SubHeadline>
 					It takes only few seconds to experience something insane !
-				</SForm.SubHeadline>
+				</Form.SubHeadline>
 
-				<Form.Register />
-			</S.FlexContainer>
-			<S.FooterContainer>
+				<FormComponent.Register />
+			</Form.FlexContainer>
+			<Form.FooterContainer>
 				Don't have an account yet?{" "}
 				<Link href="/sign-up">
 					<a>Sign up</a>
 				</Link>
-			</S.FooterContainer>
-		</S.SignInWrapper>
+			</Form.FooterContainer>
+		</Form.Wrapper>
 	);
 };
 
