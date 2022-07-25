@@ -15,6 +15,9 @@ export const GlobalStyle = createGlobalStyle`
         --black:#393939;
         --light-grey:#F7F8FA;
 
+        --hover-dark-blue:#1d2049;
+        --hover-light-grey:#f1eeee;
+
         --main-font:'Titillium Web', sans-serif;
 
         --button:1.6rem;//tohle mozna budu resit rovnou v tech stylech, at tady tohle neni zbytecne slozity -> takze to pak smaz :)

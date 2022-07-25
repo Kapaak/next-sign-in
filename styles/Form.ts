@@ -22,4 +22,9 @@ export const Item = styled.div`
 		padding: 1.6rem 2rem;
 		border-radius: 0.8rem;
 	}
+
+	label {
+		color: var(--dark-blue);
+		padding-left: 2rem;
+	}
 `;
