@@ -8,9 +8,11 @@ const SignUpForm = () => {
 		<Form.Wrapper>
 			<Form.FlexContainer>
 				<Form.Headline>I welcome you user!</Form.Headline>
-				<Form.SubHeadline>You journey can start here and now!</Form.SubHeadline>
+				<Form.SubHeadline>
+					Your journey can start here and now!
+				</Form.SubHeadline>
 
-				<FormComponent.Login />
+				<FormComponent.Register />
 			</Form.FlexContainer>
 			<Form.FooterContainer>
 				Already have an account?{" "}

@@ -13,7 +13,7 @@ const SignInForm = () => {
 					It takes only few seconds to experience something insane !
 				</Form.SubHeadline>
 
-				<FormComponent.Register />
+				<FormComponent.Login />
 			</Form.FlexContainer>
 			<Form.FooterContainer>
 				Don't have an account yet?{" "}

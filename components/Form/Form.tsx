@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as Yup from "yup";
 //components
 import FormActions from "./FormActions/FormActions";
 //styles
@@ -13,7 +15,7 @@ type Inputs = {
 	password: string;
 };
 
-export const Register = () => {
+export const Login = () => {
 	const revealPasswordIcon = "/icons/eye-open.svg";
 	const hidePasswordIcon = "/icons/eye-closed.svg";
 
@@ -77,25 +79,60 @@ export const Register = () => {
 	);
 };
 
-export const Login = () => {
+interface RegInputs extends Inputs {
+	passwordConfirm: string;
+	name: string;
+}
+
+export const Register = () => {
+	const formSchema = Yup.object().shape({
+		name: Yup.string().required("User name cant be blank"), //tady tohle by mohlo prochazet databazi, jestli uz neexistuje stejny jmeno ... to stejny s emailem (to se ale mozna muze handlovat az pri submitu)
+		email: Yup.string()
+			.required("Email cant be blank")
+			.matches(
+				/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+				"Email must have correct format"
+			),
+		password: Yup.string()
+			.required("Password is mandatory")
+			.min(3, "Password must be atleast 3 chars long"),
+		passwordConfirm: Yup.string()
+			.required("Password is mandatory")
+			.oneOf([Yup.ref("password")], "Passwords does not match"),
+	});
+
+	const formOptions = { resolver: yupResolver(formSchema) };
+	const { register, handleSubmit, reset, formState } =
+		useForm<RegInputs>(formOptions);
+	const { errors } = formState;
+
+	const onSubmit: SubmitHandler<RegInputs> = data => {
+		console.log(data, "data");
+		console.log(errors, "errors");
+	};
+
 	return (
-		<S.Form>
+		<S.Form onSubmit={handleSubmit(onSubmit)}>
 			<S.ItemContainer>
 				<Form.Item>
-					<label htmlFor="reg-name">user name</label>
-					<input type="text" name="reg-name" />
+					<label htmlFor="name">user name</label>
+					<input type="text" {...register("name")} />
+					<div>{errors.name?.message}</div>
 				</Form.Item>
 				<Form.Item>
-					<label htmlFor="reg-email">registration email</label>
-					<input type="email" name="reg-email" />
+					<label htmlFor="email">registration email</label>
+					<input type="text" {...register("email")} />
+					<div>{errors.email?.message}</div>
 				</Form.Item>
 				<Form.Item>
-					<label htmlFor="reg-password">enter your password</label>
-					<input type="password" name="reg-password" />
+					<label htmlFor="password">enter your password</label>
+					<input type="password" {...register("password")} />
+					<div>{errors.password?.message}</div>
 				</Form.Item>
 				<Form.Item>
-					<label htmlFor="reg-password-confirm">confirm your password</label>
-					<input type="password" name="reg-password-confirm" />
+					<label htmlFor="passwordConfirm">confirm your password</label>
+					<input type="password" {...register("passwordConfirm")} />
+					<div>{errors.passwordConfirm?.message}</div>
 				</Form.Item>
 			</S.ItemContainer>
 			<S.ButtonContainer>
