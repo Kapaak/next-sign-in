@@ -114,25 +114,27 @@ export const Register = () => {
 	return (
 		<S.Form onSubmit={handleSubmit(onSubmit)}>
 			<S.ItemContainer>
-				<Form.Item>
+				<Form.Item error={!!errors.name?.message}>
 					<label htmlFor="name">user name</label>
 					<input type="text" {...register("name")} />
-					<div>{errors.name?.message}</div>
+					<Form.ErrorMessage>{errors.name?.message}</Form.ErrorMessage>
 				</Form.Item>
-				<Form.Item>
+				<Form.Item error={!!errors.email?.message}>
 					<label htmlFor="email">registration email</label>
 					<input type="text" {...register("email")} />
-					<div>{errors.email?.message}</div>
+					<Form.ErrorMessage>{errors.email?.message}</Form.ErrorMessage>
 				</Form.Item>
-				<Form.Item>
+				<Form.Item error={!!errors.password?.message}>
 					<label htmlFor="password">enter your password</label>
 					<input type="password" {...register("password")} />
-					<div>{errors.password?.message}</div>
+					<Form.ErrorMessage>{errors.password?.message}</Form.ErrorMessage>
 				</Form.Item>
-				<Form.Item>
+				<Form.Item error={!!errors.passwordConfirm?.message}>
 					<label htmlFor="passwordConfirm">confirm your password</label>
 					<input type="password" {...register("passwordConfirm")} />
-					<div>{errors.passwordConfirm?.message}</div>
+					<Form.ErrorMessage>
+						{errors.passwordConfirm?.message}
+					</Form.ErrorMessage>
 				</Form.Item>
 			</S.ItemContainer>
 			<S.ButtonContainer>

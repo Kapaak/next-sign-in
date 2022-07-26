@@ -14,6 +14,7 @@ export const GlobalStyle = createGlobalStyle`
         --white:#fcfcfc;
         --black:#393939;
         --light-grey:#F7F8FA;
+        --red:#ee3a3a;
 
         --hover-dark-blue:#1d2049;
         --hover-light-grey:#f1eeee;

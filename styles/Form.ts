@@ -13,20 +13,35 @@ export const SubHeadline = styled.h2`
 	font-weight: 400;
 `;
 
-export const Item = styled.div`
+export const Item = styled.div<{ error?: boolean }>`
+	/* &:focus-within label {
+		display: block;
+	} */
 	input {
 		display: block;
 		background-color: var(--light-grey);
-		border: none;
 		width: 100%;
 		padding: 1.6rem 2rem;
 		border-radius: 0.8rem;
+		border: ${({ error }) =>
+			error ? "1px solid var(--pink)" : "1px solid transparent"};
+
+		&:focus {
+			outline: 1px solid var(--dark-blue);
+			border: 1px solid transparent;
+		}
 	}
 
 	label {
+		/* display: none; */
 		color: var(--dark-blue);
 		padding-left: 2rem;
 	}
+`;
+
+export const ErrorMessage = styled.p`
+	color: var(--red);
+	font-size: 1.4rem;
 `;
 
 export const Wrapper = styled.div`
