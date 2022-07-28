@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { signIn } from "next-auth/react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
@@ -65,7 +66,10 @@ export const Login = () => {
 			<FormActions />
 			<S.ButtonContainer>
 				<Button.Submit type="submit">login</Button.Submit>
-				<Button.Google>
+				<Button.Google
+					type="button"
+					onClick={() => signIn("google", { callbackUrl: "/" })}
+				>
 					<Image
 						src="/icons/google.svg"
 						width={20}
