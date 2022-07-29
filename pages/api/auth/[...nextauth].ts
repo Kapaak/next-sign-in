@@ -56,4 +56,8 @@ export default NextAuth({
 			);
 		},
 	},
+	pages: {
+		// error: "/sign-in",
+		signIn: "/sign-in",
+	},
 });
